@@ -4,8 +4,16 @@ import quotes from "./assets/images/pattern-quotes.svg";
 import curve from "./assets/images/pattern-curve.svg";
 import { useEffect, useState } from "react";
 
+type dataProps = {
+  name: string;
+  quote: string;
+  title: string;
+  image: string;
+};
+
 function App() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<dataProps[]>([]);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     fetch("data.json")
@@ -13,33 +21,43 @@ function App() {
       .then((info) => setData(info));
   }, []);
 
+  function handleIncrease(): void {
+    setIndex((v) => (v == data.length - 1 ? 0 : v + 1));
+  }
+  function handleDecrease(): void {
+    setIndex((v) => (v == 0 ? data.length - 1 : v - 1));
+  }
   console.log(data);
 
   return (
-    <main>
-      <picture>
-        <img src={"../public/image-tanya.jpg"} alt="" />
-        <div>
-          <button>
-            <img src={prevBtn} alt="" />
-          </button>
-          <button>
-            <img src={nextBtn} alt="" />
-          </button>
-        </div>
-      </picture>
-      <section className="profile-section">
-        <p>
-          “ I’ve been interested in coding for a while but never taken the jump,
-          until now. I couldn’t recommend this course enough. I’m now in the job
-          of my dreams and so excited about the future. ”
-        </p>
-        <span className="profile-name">Tanya Sinclair</span>
-        <span className="profile-title">UX Engineer</span>
-        <img src={quotes} alt="" />
-        <img src={curve} alt="" />
-      </section>
-    </main>
+    <>
+      {data.length > 0 ? (
+        <main>
+          <section className="hero-section">
+            <img src={data[index].image} alt="" className="avatar" />
+            <div className="btn-slider">
+              <button onClick={handleDecrease}>
+                <img src={prevBtn} alt="" />
+              </button>
+              <button onClick={handleIncrease}>
+                <img src={nextBtn} alt="" />
+              </button>
+            </div>
+          </section>
+          <section className="profile-section">
+            <p>{data[index].quote}</p>
+            <h1 className="profile-name">{data[index].name}</h1>
+            <h2 className="profile-title">{data[index].title}</h2>
+            <img src={quotes} alt="" className="quotes" />
+          </section>
+          <img src={curve} alt="" className="bg-curve" />
+        </main>
+      ) : (
+        <main>
+          <h1>Ups!!</h1>
+        </main>
+      )}
+    </>
   );
 }
 
