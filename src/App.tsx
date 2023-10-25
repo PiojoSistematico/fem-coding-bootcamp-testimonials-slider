@@ -27,7 +27,6 @@ function App() {
   function handleDecrease(): void {
     setIndex((v) => (v == 0 ? data.length - 1 : v - 1));
   }
-  console.log(data);
 
   return (
     <>
@@ -46,15 +45,18 @@ function App() {
           </section>
           <section className="profile-section">
             <p>{data[index].quote}</p>
-            <h1 className="profile-name">{data[index].name}</h1>
-            <h2 className="profile-title">{data[index].title}</h2>
+            <div className="flex">
+              <h1 className="profile-name">{data[index].name}</h1>
+              <h2 className="profile-title">{data[index].title}</h2>
+            </div>
+
             <img src={quotes} alt="" className="quotes" />
           </section>
           <img src={curve} alt="" className="bg-curve" />
         </main>
       ) : (
         <main>
-          <h1>Ups!!</h1>
+          <h1>Error</h1>
         </main>
       )}
     </>

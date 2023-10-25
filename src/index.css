@@ -145,7 +145,7 @@ main {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background: url("./assets//images/pattern-bg.svg");
+  background-image: url("./assets/images/pattern-bg.svg");
   background-repeat: no-repeat;
   background-size: 400px 400px;
   background-position: center;
@@ -187,6 +187,11 @@ button {
 
   padding: var(--size-600) var(--size-400);
 }
+.flex {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-400);
+}
 
 h1 {
   color: var(--clr-primary-dark-blue);
@@ -226,5 +231,41 @@ h2 {
   }
   .mobile {
     display: none;
+  }
+  main {
+    grid-template-rows: 1fr;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    justify-items: center;
+  }
+  .hero-section {
+    order: 1;
+    background-image: url("./assets/images/pattern-bg.svg");
+    background-repeat: no-repeat;
+    background-size: 500px 500px;
+    background-position: center;
+    width: 500px;
+    height: 500px;
+  }
+  .profile-section {
+    order: -1;
+    text-align: left;
+    align-items: start;
+    z-index: 2;
+    padding-left: var(--size-1000);
+  }
+
+  .avatar {
+    height: 400px;
+    width: 400px;
+    box-shadow: 0 1rem 1rem 0.2rem hsla(240, 18%, 70%, 0.4);
+  }
+  .btn-slider {
+    transform: translate(-100%, 500%);
+  }
+  .flex {
+    display: flex;
+    flex-direction: row;
+    gap: var(--size-400);
   }
 }
